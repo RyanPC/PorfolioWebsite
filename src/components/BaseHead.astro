@@ -1,6 +1,7 @@
 ---
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
+import astroConfig from '../../astro.config.mjs';
 import '../styles/global.css';
 
 interface Props {
@@ -12,6 +13,8 @@ interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
+
+const {base} = astroConfig;
 ---
 
 <!-- Global Metadata -->
@@ -21,8 +24,8 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
 <meta name="generator" content={Astro.generator} />
 
 <!-- Font preloads -->
-<link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin />
-<link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin />
+<link rel="preload" href={base? base+"/fonts/atkinson-regular.woff" : "/fonts/atkinson-regular.woff"} as="font" type="font/woff" crossorigin />
+<link rel="preload" href={base? base+"/fonts/atkinson-bold.woff" : "/fonts/atkinson-bold.woff"} as="font" type="font/woff" crossorigin />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
